@@ -8,11 +8,11 @@ const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-const {loading,loging} = useLogin()
+    const {loading,login} = useLogin()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await Login(username,password)
+        await login(username,password)
     }
 
   return <div className='flex flex-col items-center justify-center min-w-96 mx-auto'>
@@ -27,7 +27,7 @@ const {loading,loging} = useLogin()
                 <span className='text-base label-text text-white' >Username</span>
 
             </label>
-            <input type='text' placeholder='Enter Username' className='w-full input input-bordered h-10'></input>
+            <input type='text' placeholder='Enter Username' className='w-full input input-bordered h-10' value={username} onChange={(e) => setUsername(e.target.value)}></input>
         </div>
 
         <div>

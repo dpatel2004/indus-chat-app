@@ -1,8 +1,9 @@
 import User from '../models/user.model.js';
+import mongoose from 'mongoose';
 
 export const getUsersForSidebar = async (req, res) => {
     try{
-        const loggedInUserId = req.user._id
+        const loggedInUserId = new mongoose.Types.ObjectId(req.params.id);
 
         const filteredUsers = await User.find({ _id: { $ne: loggedInUserId}}).select("-password");
 

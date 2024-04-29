@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useAuthContext } from '../context/AuthContext';
+import axios from 'axios';
 
 const useLogin = () => {
    const [loading, setLoading] = useState(false);
@@ -10,18 +11,23 @@ const useLogin = () => {
    const login = async (username, password) => {
 
 
-    const success = handleInputErrors(username,password);
-    if(!success) return;
+    // const success = handleInputErrors(username,password);
+    // if(!success) return;
 
     setLoading(true)
     try{
-        const res = await fetch("http://localhost:5000/api/auth/login", {
-            method: "POST",
-        headers:{"Content-Type": "application/json" },
-            body:JSON.stringify({username,password}),
+        // const res = await fetch("http://localhost:5000/api/auth/login", {
+        //     headers:{"Content-Type": "application/json" },
+        //     body:JSON.stringify({username,password}),
+        // });
+        const body = JSON.stringify({username,password})
+        console.log("body", body)
+        const res = await axios.post("http://localhost:5000/api/auth/login", body, {
+            withCredentials: true,
+            headers:{"Content-Type": "application/json" },
         });
-
-        const data = await res.json();
+        console.log("data =", res)
+        const data = await res.data;
         if(data.error){
             throw new Error(data.error);
         }

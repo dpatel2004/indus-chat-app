@@ -23,7 +23,6 @@ export const signup = async (req, res) => {
     const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`
     const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`
     
-    console.log("reached code ======")
     const newUser = new User({
         fullName,
         username,
@@ -52,9 +51,9 @@ export const signup = async (req, res) => {
 
 export const login = async (req, res) => {
     try{
+        console.log("req =", req.body);
         const {username, password} = req.body;
         const user = await User.findOne({username});
-        console.log("user =", user)
         const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
         
         if(!user || !isPasswordCorrect){

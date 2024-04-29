@@ -11,8 +11,11 @@ const useGetConversations = () => {
     useEffect(() => {
         const getConversations = async () => {
             setLoading(true);
+            const local = localStorage.getItem('chat-user')
+            const localData = JSON.parse(local)
+
             try {
-                const res = await fetch("http://localhost:5000/api/users");
+                const res = await fetch(`http://localhost:5000/api/users/${localData._id}`);
                 const data = await res.json();
                 if (data.error){
                     throw new Error(data.error);

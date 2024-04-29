@@ -7,16 +7,19 @@ import userRoutes from "./routes/user.routes.js";
 import messageRoutes from "./routes/message.routes.js"
 
 import connectToMongoDB from "./db/connectToMongoDB.js";
+dotenv.config();
 
 const app = express();
-app.use(cors());
 
 const PORT = process.env.PORT || 5000;
 
-dotenv.config();
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({
+    credentials:true,
+    origin: 'http://localhost:3000',
+}));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages",messageRoutes);

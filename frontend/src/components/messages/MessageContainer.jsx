@@ -7,9 +7,9 @@ import useConversation from '../../zustand/useConversation';
 const MessageContainer = () => {
     const {selectedConversation, setSelectedConversation} = useConversation()
 
-useEffect(() =>{
-    return () => setSelectedConversation(null)
-}, [selectedConversation]);
+    useEffect(() =>{
+        return () => setSelectedConversation(null)
+    }, [selectedConversation]);
 
 
 
